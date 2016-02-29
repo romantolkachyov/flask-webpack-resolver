@@ -3,7 +3,7 @@ var shelljs = require('shelljs');
 
 var modPathMap = {};
 
-var getResolveFlask = function(exts) {
+var getResolveFlask = function(flask_app) {
   return function(request, callback) {
     request.request; // string with module name
 
@@ -18,7 +18,7 @@ var getResolveFlask = function(exts) {
         context.fileSystem.stat(testFilename, function(err, stats) {
             if (err) {
                 console.log('file does not exists', testFilename);
-                // return tryToFindExtension(index + 1);
+                return;
             }
 
             var resultFilename = testFilename;
@@ -44,11 +44,12 @@ var getResolveFlask = function(exts) {
   };
 };
 
-var FlaskResolverPlugin = function(exts) {
-    this.exts = exts || ['css', 'js', 'scss', 'less'];
+var FlaskResolverPlugin = function(flask_app) {
+    this.flask_app = flask_app || 'app:app'
+    var mod_and_obj = flask_app.split(':');
     var app_object = 'app:app'
-    var command = "python -c \"import json;from app import app; print '-*- START -*-'; print json.dumps({name: b.static_folder for name, b in app.blueprints.items()});\"";
-
+    var command = "python -c \"import json;from " + mod_and_obj[0] + " import " + mod_and_obj[1] + " as myapp; myapp = myapp() if hasattr(myapp, 'func_name') else myapp; print '-*- START -*-'; print json.dumps({name: b.static_folder for name, b in myapp.blueprints.items()});\"";
+    debugger;
     var res = shelljs.exec(command, {
         silent: true
     }).output;
@@ -58,7 +59,7 @@ var FlaskResolverPlugin = function(exts) {
 };
 
 FlaskResolverPlugin.prototype.apply = function(resolver) {
-  resolver.plugin('module', getResolveFlask(this.exts));
+  resolver.plugin('module', getResolveFlask(this.flask_app));
 };
 
 module.exports = FlaskResolverPlugin;

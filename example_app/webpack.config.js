@@ -2,7 +2,7 @@ var path = require('path');
 
 var webpack = require('webpack');
 
-var FlaskResolverPlugin = require('webpack-flask-loader')
+var FlaskResolverPlugin = require('flask-webpack-resolver');
 
 module.exports = {
     debug: true,
@@ -11,7 +11,7 @@ module.exports = {
     },
     plugins: [
         new webpack.ResolverPlugin([
-            new FlaskResolverPlugin()
+            new FlaskResolverPlugin('app:init_app')
         ])
     ],
     output: {
@@ -19,5 +19,5 @@ module.exports = {
         publicPath: "/static/",
         filename: "[name].js"
     },
-    devtool: "inline-source-map", // or "source-map"
+    devtool: "inline-source-map" // or "source-map"
 };
