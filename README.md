@@ -24,7 +24,7 @@ Now you can add plugin to config:
 
 Plugin will find flask app from string passed as a first plugin argument. String must contain python module name and object name separated by `:`. For example, `app:app` will produce `from app import app` import.
 
-You also can specify any factory function for your wich will be called with no arguments and result will be used as app instance.
+You also can specify any factory function wich will be called with no arguments and result will be used as app instance. See example project for `init_app` case.
 
 # Usage
 
