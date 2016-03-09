@@ -1,6 +1,6 @@
 {
   "name": "flask-webpack-resolver",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Python Flask reolver plugin for webpack",
   "main": "index.js",
   "scripts": {
@@ -12,9 +12,10 @@
   },
   "author": "Roman Tolkachyov <roman@tolkachyov.name> (http://roman.tolkachyov.name/)",
   "license": "MIT",
-  "devDependencies": {
-    "shelljs": "^0.6.0",
-    "webpack": "^1.12.14",
-    "webpack-dev-server": "^1.14.1"
+  "dependencies": {
+    "shelljs": ">=0.6.0"
+  },
+  "peerDependencies": {
+    "webpack": "1.12.x"
   }
 }
