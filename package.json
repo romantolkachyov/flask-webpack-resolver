@@ -1,6 +1,6 @@
 {
   "name": "flask-webpack-resolver",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Python Flask reolver plugin for webpack",
   "main": "index.js",
   "scripts": {

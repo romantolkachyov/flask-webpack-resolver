@@ -37,3 +37,10 @@ or if your blueprints static contains `index.js` file you can obtain filename pa
     require('flask.blueprint_name');
 
 Look at example_app for details.
+
+
+# Changes
+
+## 0.3.0
+
+- Python 3 support
